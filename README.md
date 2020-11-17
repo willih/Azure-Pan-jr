@@ -1,4 +1,4 @@
-# Azure-Pan-wc
+# Azure-Pan-rj
 # VM-Series in an Availability Set Template
 
 
