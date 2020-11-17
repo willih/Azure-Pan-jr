@@ -86,6 +86,8 @@
             "defaultValue": "latest",
             "allowedValues": [
                 "9.1.2",
+                "10.0.0",
+                "10.0.1",
 		"latest"
             ],
             "metadata": {
@@ -121,7 +123,7 @@
         },
 	"availabilitySetName": {
             "type": "string",
-	    "defaultValue": "VMSeriesFwAvSet",
+	    "defaultValue": "avset-prod-wus2-panfw-01",
             "metadata": {
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
@@ -145,74 +147,74 @@
       "metadata": {
         "description": "Name of the virtual network that the consumer wants to use"
       },
-      "defaultValue": "panVnet"
+      "defaultValue": "vnet-prod-wus2-hub-001"
     },
     "virtualNetworkAddressPrefix": {
       "type": "string",
-      "defaultValue": "10.201.224.0/19",
+      "defaultValue": "10.222.222.0/22",
       "metadata": {
         "description": "Virtual network address CIDR"
       }
     },
     "subnet0Name": {
       "type": "string",
-      "defaultValue": "Mgmt",
+      "defaultValue": "palo-mgmt",
       "metadata": {
         "description": "Subnet for the Mgmt"
       }
     },
     "subnet1Name": {
       "type": "string",
-      "defaultValue": "Untrust",
+      "defaultValue": "palo-untrust",
       "metadata": {
         "description": "Subnet for the Untrust"
       }
     },
     "subnet2Name": {
       "type": "string",
-      "defaultValue": "Trust",
+      "defaultValue": "palo-trust",
       "metadata": {
         "description": "Subnet for the Trust"
       }
     },
     "subnet0Prefix": {
       "type": "string",
-      "defaultValue": "10.201.224.0/29",
+      "defaultValue": "10.222.222.0/28",
       "metadata": {
         "description": "Mgmt subnet CIDR"
       }
     },
     "subnet1Prefix": {
       "type": "string",
-      "defaultValue": "10.201.224.32/28",
+      "defaultValue": "10.222.222.32/28",
       "metadata": {
         "description": "Untrust subnet CIDR"
       }
     },
     "subnet2Prefix": {
       "type": "string",
-      "defaultValue": "10.201.224.16/28",
+      "defaultValue": "10.222.222.16/28",
       "metadata": {
         "description": "Trust subnet CIDR"
       }
     },
     "subnet0StartAddress": {
       "type": "string",
-      "defaultValue": "10.201.224.4",
+      "defaultValue": "10.222.222.4",
       "metadata": {
         "description": "Mgmt subnet start address"
       }
     },
     "subnet1StartAddress": {
       "type": "string",
-      "defaultValue": "10.201.224.36",
+      "defaultValue": "10.222.222.36",
       "metadata": {
         "description": "Untrust subnet start address"
       }
     },
     "subnet2StartAddress": {
       "type": "string",
-      "defaultValue": "10.201.224.20",
+      "defaultValue": "10.222.222.20",
       "metadata": {
         "description": "Trust subnet start address"
       }
@@ -226,7 +228,7 @@
         "nicName": "[concat(parameters('vmName'), '-eth')]",
         "FWPrivateIPAddressUntrust": "[parameters('subnet1StartAddress')]",
         "FWPrivateIPAddressTrust": "[parameters('subnet2StartAddress')]",
-        "publicIPAddressType": "Dynamic",
+        "publicIPAddressType": "Static",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
         "nsgname-mgmt": "[concat(parameters('vmName'), '-DefaultNSG')]",
         "subnet0Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet0Name'))]",
